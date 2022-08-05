@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-user
+  labels:
+    app: app-user
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 50051
+      targetPort: 50051
+  selector:
+    app: app-user

@@ -1,0 +1,20 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: app-auth
+  labels:
+    app: app-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-auth
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: app-auth
+    spec:
+      containers:
+        - name: app-auth
+          image: app-auth:auth

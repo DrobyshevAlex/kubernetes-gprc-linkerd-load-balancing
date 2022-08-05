@@ -1,0 +1,20 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: app-user
+  labels:
+    app: app-user
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-user
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: app-user
+    spec:
+      containers:
+        - name: app-user
+          image: app-user:user

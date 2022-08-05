@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "/models";
+
+service AuthService {
+  // Sends a greeting
+  rpc GetUser (GetUserRequest) returns (GetUserResponse) {}
+}
+
+message GetUserRequest {
+    string username = 1;
+}
+
+message GetUserResponse {
+    string username = 1;
+    string password = 2;
+}
