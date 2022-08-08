@@ -17,7 +17,10 @@ spec:
     spec:
       containers:
         - name: app-user
-          image: app-user:user
+          image: ghcr.io/drobyshevalex/app-user:1.0.0
+          env:
+            - name: GRPC_PORT
+              value: "50051"
       terminationGracePeriodSeconds: 5
 ---
 kind: Service

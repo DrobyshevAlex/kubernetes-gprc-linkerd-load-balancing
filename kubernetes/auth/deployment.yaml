@@ -17,4 +17,24 @@ spec:
     spec:
       containers:
         - name: app-auth
-          image: app-auth:auth
+          image: ghcr.io/drobyshevalex/app-auth:1.0.0
+          env:
+            - name: GRPC_ADDR
+              value: "app-user:50051"
+            - name: AUTH_ADDR
+              value: "0.0.0.0:3000"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-auth
+  labels:
+    app: app-auth
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: app-auth

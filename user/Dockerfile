@@ -2,8 +2,6 @@ FROM golang:alpine as builder
 
 WORKDIR /app
 
-RUN ls -l
-
 ADD . .
 
 RUN go mod download
