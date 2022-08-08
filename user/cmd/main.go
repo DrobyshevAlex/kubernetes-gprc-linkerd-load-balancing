@@ -1,9 +1,8 @@
 package main
 
 import (
-	"flag"
-	"fmt"
 	"log"
+	"os"
 	"net"
 	"user/models"
 	"user/services"
@@ -11,13 +10,12 @@ import (
 	"google.golang.org/grpc"
 )
 
-var (
-	port = flag.Int("port", 50051, "The server port")
-)
-
 func main() {
-	flag.Parse()
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
+	port := os.Getenv("GRPC_PORT")
+	if len(port) == 0 {
+		port = "50051"
+	}
+	lis, err := net.Listen("tcp", ":" + port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
