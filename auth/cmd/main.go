@@ -13,12 +13,9 @@ import (
 	"auth/models"
 )
 
-const (
-	defaultName = "world"
-)
-
 var (
 	addr = flag.String("addr", "app-user:50051", "the address to connect to")
+	//addr = flag.String("addr", "localhost:50051", "the address to connect to")
 )
 
 func main() {
@@ -37,9 +34,10 @@ func main() {
 
 		r, err := c.GetUser(ctx, &models.GetUserRequest{Username: "User " + strconv.Itoa(i)})
 		if err != nil {
-			log.Fatalf("not exec: %v", err)
+			log.Printf("not exec: %v", err)
+		} else {
+			log.Printf("Success: %s", r.Password)
 		}
-		log.Printf("Success: %s", r.Password)
 		time.Sleep(time.Second * 1)
 	}
 }

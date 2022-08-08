@@ -38,5 +38,4 @@ linkerd check
 ```bash
 cat kubernetes/auth/deployment.yaml | linkerd inject - | kubectl apply -f -
 kubectl apply -f kubernetes/user/deployment.yaml
-kubectl apply -f kubernetes/user/service.yaml
 ```
