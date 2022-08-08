@@ -32,9 +32,9 @@ metadata:
   labels:
     app: app-auth
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
-    - protocol: ClusterIP
+    - protocol: TCP
       port: 80
       targetPort: 3000
   selector:
