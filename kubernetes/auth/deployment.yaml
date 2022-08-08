@@ -18,6 +18,7 @@ spec:
       containers:
         - name: app-auth
           image: ghcr.io/drobyshevalex/app-auth:1.0.0
+          imagePullPolicy: Always
           env:
             - name: GRPC_ADDR
               value: "app-user:50051"

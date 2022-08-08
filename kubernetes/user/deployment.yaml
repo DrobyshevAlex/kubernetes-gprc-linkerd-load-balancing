@@ -18,6 +18,7 @@ spec:
       containers:
         - name: app-user
           image: ghcr.io/drobyshevalex/app-user:1.0.0
+          imagePullPolicy: Always
           env:
             - name: GRPC_PORT
               value: "50051"
