@@ -20,8 +20,8 @@ eval $(minikube docker-env)
 ## build images
 
 ```bash
-docker build -t app-auth:auth ./auth
-docker build -t app-user:user ./user
+docker buildx build -t app-auth:auth ./auth --platform linux/amd64
+docker buildx build -t app-user:user ./user --platform linux/amd64
 ```
 
 ## install linkerd
