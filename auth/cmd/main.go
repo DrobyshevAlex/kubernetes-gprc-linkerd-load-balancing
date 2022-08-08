@@ -3,12 +3,12 @@ package main
 import (
 	"context"
 	"log"
-	"time"
 	"os"
+	"time"
 
+	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"github.com/gin-gonic/gin"
 
 	"auth/models"
 )
@@ -18,7 +18,7 @@ func main() {
 	if len(addrGrpc) == 0 {
 		addrGrpc = "localhost:50051"
 	}
-	
+
 	conn, err := grpc.Dial(addrGrpc, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
