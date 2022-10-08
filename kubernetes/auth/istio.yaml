@@ -26,8 +26,7 @@ spec:
     - match:
         - uri:
             prefix: /
-      route:
-        - destination:
-            port:
-              number: 80
-            host: app-auth
+      directResponse:
+        status: 504
+      retries:
+        attempts: 0

@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"time"
 
@@ -27,9 +29,19 @@ func main() {
 	connAuth := models.NewAuthServiceClient(conn)
 
 	r := gin.Default()
+	r.GET("/test", func(c *gin.Context) {
+		resp, err := http.Get("http://app-user")
+		fmt.Println(resp)
+		fmt.Println(err)
+		c.JSON(200, gin.H{
+			"message": "OK",
+		})
+	})
 	r.GET("/", func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+		//outgoingContext := metadata.AppendToOutgoingContext(ctx, "x-envoy-retry-grpc-on", "5xx,cancelled,deadline-exceeded,internal,resource-exhausted,unavailable", "x-envoy-max-retries", "3", "test-key", "test-val", "x-envoy-upstream-rq-timeout-ms", "15000")
 		defer cancel()
+		fmt.Println("QUERY GRPC")
 		r, err := connAuth.GetUser(ctx, &models.GetUserRequest{Username: "User"})
 		if err != nil {
 			log.Printf("not exec: %v", err)

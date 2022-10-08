@@ -1,0 +1,30 @@
+version: "3.5"
+
+services:
+  auth:
+    image: ghcr.io/drobyshevalex/app-auth:latest
+    build:
+      dockerfile: auth/Dockerfile
+    ports:
+      - 80:8080
+    depends_on:
+      - user
+    environment:
+      GRPC_ADDR: user:50051
+    networks:
+      - default
+      - net
+  
+  user:
+    image: ghcr.io/drobyshevalex/app-user:latest
+    build:
+      dockerfile: user/Dockerfile
+    ports:
+      - 50051:50051
+    networks:
+      - default
+      - net
+
+networks:
+  net:
+    external: true

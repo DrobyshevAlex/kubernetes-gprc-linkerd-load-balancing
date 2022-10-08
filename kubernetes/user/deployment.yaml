@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: app-user
-          image: ghcr.io/drobyshevalex/app-user:1.0.0
+          image: ghcr.io/drobyshevalex/app-user:latest
           imagePullPolicy: Always
           env:
             - name: GRPC_PORT
@@ -31,10 +31,10 @@ metadata:
   labels:
     app: app-user
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - protocol: TCP
-      port: 50051
+      port: 8080
       targetPort: 50051
   selector:
     app: app-user

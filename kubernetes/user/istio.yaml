@@ -1,0 +1,32 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: user-gateway
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: auth
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - user-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      directResponse:
+        status: 504
+      retries:
+        attempts: 0

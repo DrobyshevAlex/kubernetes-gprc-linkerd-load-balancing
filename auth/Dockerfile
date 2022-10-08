@@ -1,8 +1,10 @@
 FROM --platform=linux/amd64 golang:alpine as builder
 
+RUN go install github.com/githubnemo/CompileDaemon@latest
+
 WORKDIR /app
 
-ADD . .
+ADD auth .
 
 RUN go mod download
 
@@ -13,4 +15,4 @@ WORKDIR /app
 
 COPY --from=builder /app/bin /app
 
-CMD [ "./app" ]
+CMD [ "/app/app" ]
