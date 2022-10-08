@@ -34,7 +34,7 @@ spec:
   type: ClusterIP
   ports:
     - protocol: TCP
-      port: 8080
+      port: 3333
       targetPort: 50051
   selector:
     app: app-user
