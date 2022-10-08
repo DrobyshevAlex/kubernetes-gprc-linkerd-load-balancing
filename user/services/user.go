@@ -3,6 +3,8 @@ package services
 import (
 	"context"
 	"log"
+	"math/rand"
+	"time"
 
 	"user/models"
 )
@@ -13,11 +15,11 @@ type Server struct {
 }
 
 func (s *Server) GetUser(ctx context.Context, in *models.GetUserRequest) (*models.GetUserResponse, error) {
-	s.V++
-
-	log.Println("V:", s.V)
+	rand.Seed(time.Now().UnixNano())
+	r := rand.Intn(10)
+	log.Println("Rand:", r)
 	log.Println("Received:", in.Username)
-	if s.V == 2 {
+	if r == 1 {
 		log.Panicln("Exit")
 	}
 	return &models.GetUserResponse{

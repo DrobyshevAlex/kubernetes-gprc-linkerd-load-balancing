@@ -1,32 +1,16 @@
 apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: user-gateway
-spec:
-  selector:
-    istio: ingressgateway # use Istio default gateway implementation
-  servers:
-    - port:
-        number: 3333
-        name: http
-        protocol: HTTP
-      hosts:
-        - "*"
----
-apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: user
 spec:
   hosts:
-    - "*"
-  gateways:
-    - user-gateway
+    - "app-user"
   http:
-    - match:
-        - uri:
-            prefix: /
-      directResponse:
-        status: 504
+    - route:
+        - destination:
+            host: app-user
+            port:
+              number: 50051
       retries:
-        attempts: 0
+        attempts: 3
+        retryOn: connect-failure,refused-stream,5xx,unavailable
