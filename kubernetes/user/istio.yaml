@@ -13,4 +13,4 @@ spec:
               number: 50051
       retries:
         attempts: 3
-        retryOn: connect-failure,refused-stream,5xx,unavailable
+        retryOn: connect-failure,refused-stream,5xx,unavailable,internal

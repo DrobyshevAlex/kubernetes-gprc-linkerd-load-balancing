@@ -39,10 +39,13 @@ func main() {
 	})
 	r.GET("/", func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-		//outgoingContext := metadata.AppendToOutgoingContext(ctx, "x-envoy-retry-grpc-on", "5xx,cancelled,deadline-exceeded,internal,resource-exhausted,unavailable", "x-envoy-max-retries", "3", "test-key", "test-val", "x-envoy-upstream-rq-timeout-ms", "15000")
 		defer cancel()
-		fmt.Println("QUERY GRPC")
-		r, err := connAuth.GetUser(ctx, &models.GetUserRequest{Username: "User"})
+		username, ok := c.GetQuery("username")
+		if !ok {
+			username = "User"
+		}
+		fmt.Println("QUERY GRPC with username", username)
+		r, err := connAuth.GetUser(ctx, &models.GetUserRequest{Username: username})
 		if err != nil {
 			log.Printf("not exec: %v", err)
 			c.AbortWithStatusJSON(503, gin.H{"error": err})
