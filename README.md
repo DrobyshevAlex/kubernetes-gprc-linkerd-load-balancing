@@ -1,5 +1,16 @@
 # kubernetes: linkerd grpc load balancing
 
+## NEW ISTIO
+
+```bash
+kubectl apply -f kubernetes/auth/deployment.yaml
+kubectl apply -f kubernetes/auth/istio.yaml
+kubectl apply -f kubernetes/user/deployment.yaml
+kubectl apply -f kubernetes/user/istio.yaml
+```
+
+## OLD
+
 ## generate models
 
 ```bash
