@@ -1,6 +1,8 @@
+name: ""
+path: ""
 spec:
   source:
-    repoURL: "git@github.com:DrobyshevAlex/kubernetes-gprc-linkerd-load-balancing.git"
+    repoURL: "https://github.com/DrobyshevAlex/kubernetes-gprc-linkerd-load-balancing.git"
     targetRevision: HEAD
   destination:
     server: "https://kubernetes.default.svc"

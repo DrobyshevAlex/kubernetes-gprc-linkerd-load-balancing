@@ -39,3 +39,20 @@ spec:
       targetPort: 50051
   selector:
     app: app-user
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: user
+spec:
+  hosts:
+    - "app-user"
+  http:
+    - route:
+        - destination:
+            host: app-user
+            port:
+              number: 50051
+      retries:
+        attempts: 3
+        retryOn: connect-failure,refused-stream,5xx,unavailable,internal

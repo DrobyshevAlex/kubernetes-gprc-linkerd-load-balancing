@@ -1,5 +1,13 @@
 # kubernetes: linkerd grpc load balancing
 
+## ArgoCD
+
+```
+helm template argo/chart --set name=auth --set path=auth > apps/auth.yaml
+helm template argo/chart --set name=auth --set path=kubernetes/auth > apps/auth.yaml
+helm template argo/chart --set name=user --set path=kubernetes/user > apps/user.yaml
+```
+
 ## NEW ISTIO
 
 ```bash

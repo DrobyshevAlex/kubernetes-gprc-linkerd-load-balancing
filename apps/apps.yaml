@@ -1,0 +1,19 @@
+---
+# Source: chart/templates/app.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apps
+spec:
+  project: default
+  source:
+    path: apps
+    repoURL: https://github.com/DrobyshevAlex/kubernetes-gprc-linkerd-load-balancing.git
+    targetRevision: HEAD
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

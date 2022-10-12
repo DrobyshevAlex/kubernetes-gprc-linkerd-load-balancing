@@ -1,19 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app
+  name: {{ .Values.name }}
 spec:
   project: default
   source:
-    path: kubernetes
-    repoURL: { { .Values.spec.source.repoURL } }
-    targetRevision: { { .Values.spec.source.targetRevision } }
+    path: {{ .Values.path }}
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
   destination:
-    namespace: argocd
-    server: { { .Values.spec.destination.server } }
+    namespace: default
+    server: {{ .Values.spec.destination.server }}
   syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true
